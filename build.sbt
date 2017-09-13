@@ -841,7 +841,11 @@ lazy val `sbt-plugin` = (project in file("dev") / "sbt-plugin")
     name := "lagom-sbt-plugin",
     sbtPlugin := true,
     Dependencies.`sbt-plugin`,
-    addSbtPlugin(("com.typesafe.play" % "sbt-plugin" % Dependencies.PlayVersion).exclude("org.slf4j","slf4j-simple")),
+    addSbtPlugin(
+      ("com.typesafe.play" % "sbt-plugin" % Dependencies.PlayVersion)
+        .exclude("org.slf4j", "slf4j-simple")
+        .exclude("com.lightbend.play", "play-file-watch")),
+    libraryDependencies += "com.lightbend.play" %% "play-file-watch" % "1.1.0",
     scriptedDependencies := {
       val () = scriptedDependencies.value
       val () = publishLocal.value
